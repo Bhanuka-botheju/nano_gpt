@@ -1,5 +1,4 @@
 .venv
 tiny_shakespeare.txt
-uv.lock
 pyproject.toml
 .python-version

@@ -1,6 +1,9 @@
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
 
 # hyperparameters
 batch_size = 64 # how many independent sequences will we process in parallel?
@@ -232,6 +235,10 @@ for iter in range(max_iters):
     loss.backward()
     optimizer.step()
 
+torch.save(model.state_dict(), "shakespeare_transformer.pth")
+print("MODEL SAVE SUCCESSFULLY!!")
+
 # generate from the model
 context = torch.zeros((1, 1), dtype=torch.long, device=device)
 print(decode(m.generate(context, max_new_tokens=500)[0].tolist()))
+
